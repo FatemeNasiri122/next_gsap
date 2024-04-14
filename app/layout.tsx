@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/layout/Navbar";
+import Sidebar from "@/components/layout/Sidebar";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +18,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-midnight-100`}>
+          <div className="flex">
+            <Sidebar />
+            <div className="w-full">
+              <Navbar />
+              <div className="max-w-[1800px] m-auto">
+                {children}
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    </StoreProvider>
+
   );
 }
